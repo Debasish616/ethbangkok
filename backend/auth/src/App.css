@@ -1,38 +1,189 @@
-.App {
-  text-align: center;
-}
+/* Base Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1c1f2b, #131521);
+    overflow: hidden; /* Prevents overflow */
+    animation: background-fade 10s ease infinite;
+    background-size: 200% 200%;
+  }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+  .App {
+    text-align: center;
+  }
 
-@media (prefers-reduced-motion: no-preference) {
+  /* Logo Animation */
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
+    pointer-events: none;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 15s linear;
+      filter: drop-shadow(0px 0px 10px rgba(98, 255, 233, 0.8));
+    }
   }
-  to {
-    transform: rotate(360deg);
+
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
-}
+
+  /* Header Styling */
+  .App-header {
+    background: rgba(40, 44, 52, 0.8); /* semi-transparent for glassmorphism */
+    border-radius: 20px;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Link Styling */
+  .App-link {
+    color: #61dafb;
+    font-weight: bold;
+    text-decoration: none;
+    background: linear-gradient(135deg, #6a0dad, #1ec0ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: color 0.3s ease-in-out;
+  }
+
+  .App-link:hover {
+    color: #bb86fc;
+    text-decoration: underline;
+  }
+
+  /* Button Styling */
+  button {
+    background: linear-gradient(135deg, #7b2ff7, #f107a3);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0px 4px 15px rgba(123, 47, 247, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+
+  button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 20px rgba(123, 47, 247, 0.5);
+  }
+
+  button:active {
+    transform: translateY(1px);
+    box-shadow: 0px 2px 10px rgba(123, 47, 247, 0.3);
+  }
+
+  /* Optional Background Animation */
+  @keyframes background-fade {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Additional Styles for Flexibility */
+  .card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensures it takes up the full viewport height */
+    width: 100%; /* Ensures the container takes up the full width */
+    padding: 0 1rem; /* Prevents content from touching the edges */
+    box-sizing: border-box; /* Prevents any overflow */
+    overflow-x: hidden; /* Prevents horizontal overflow */
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 16px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    max-width: 100%; /* Prevents the card from overflowing its container */
+    width: 400px; /* Default card width */
+    box-sizing: border-box; /* Prevents the card from overflowing */
+  }
+
+  .card:hover {
+    transform: translateY(-10px);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .App-header {
+      padding: 1.5rem;
+      font-size: calc(10px + 1.5vmin);
+    }
+
+    .App-logo {
+      height: 30vmin;
+    }
+
+    button {
+      padding: 0.7rem 1.2rem;
+      font-size: 1rem;
+    }
+
+    .card-container {
+      padding: 1rem; /* Add some padding around the card on smaller screens */
+    }
+
+    .card {
+      padding: 1rem;
+      border-radius: 12px;
+      max-width: 90%; /* Ensures card is a bit smaller on medium screens */
+      width: auto; /* Allow the card to adjust width according to content */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .App-header {
+      padding: 1rem;
+      font-size: calc(10px + 1vmin);
+    }
+
+    .App-logo {
+      height: 25vmin;
+    }
+
+    button {
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .card-container {
+      padding: 0.5rem; /* Adjust padding on very small screens */
+    }
+
+    .card {
+      padding: 0.8rem;
+      border-radius: 10px;
+      max-width: 95%; /* Ensures the card adjusts better for small screens */
+    }
+  }

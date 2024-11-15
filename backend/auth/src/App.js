@@ -188,6 +188,7 @@ function App() {
 
   const loggedInView = (
     <>
+    <div className="col-md-2"></div>
       <button onClick={getUserInfo} className="card" style={styles.button}>
         Get User Info
       </button>
@@ -241,23 +242,22 @@ function App() {
         paddingTop: "2%",
       }}
     >
-      <h3 style={{ textAlign: "center", marginTop: 10 }}>
-        Web3Auth React Example
-      </h3>
 
       {!address && (
         <div className="row">
-          <div className="col-md-4"></div>
+          <div className="col-md-2"></div>
           <div className="col-md-8">
-            <div style={styles.card}>
+            <div className="card-container">
+                <div className="card">
               <img
+                className="card-img-top"
                 alt="login_logo"
                 src="https://cdn3d.iconscout.com/3d/premium/thumb/social-media-5806306-4863035.png?f=webp"
-                width="200px"
+                width="20px"
               />
               <h6
                 style={{
-                  color: "#000000",
+                  color: "white",
                   fontWeight: 700,
                   fontSize: 24,
                   textAlign: "center",
@@ -265,13 +265,15 @@ function App() {
               >
                 Login to Web3Auth
               </h6>
-              <h6 style={{ color: "#000000", fontWeight: 300, fontSize: 16 }}>
+              <h6 style={{ color: "white", fontWeight: 300, fontSize: 16 }}>
                 Login with your favourite social account to enable the world of
                 crypto
               </h6>
               <button
                 style={{
                   marginTop: 10,
+                  padding: "0.5rem 1rem",
+                  margin: "0.5rem",
                   backgroundColor: "#8347E5",
                   color: "#ffffff",
                   textDecoration: "none",
@@ -286,7 +288,7 @@ function App() {
               >
                 Login with social
               </button>
-            </div>
+            </div></div>
           </div>
         </div>
       )}
@@ -304,7 +306,7 @@ function App() {
                 src="https://res.cloudinary.com/beincrypto/image/upload/v1661461003/logos/ukflgfdxacovx9yzyrr4.png"
                 width="120px"
               />
-              <h6 style={{ color: "#000000", fontWeight: 700, fontSize: 20 }}>
+              <h6 style={{ color: "#000000",padding: 100, fontWeight: 700, fontSize: 20 }}>
                 Successfully Logged In
               </h6>
               <div style={{ marginTop: 20, textAlign: "left", color: "black" }}>
