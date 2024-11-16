@@ -217,7 +217,19 @@ const WholeWrapper = styled.div`
   position: relative;
 `;
 
+const AppWrapper = styled.div`
+  flex-flow: column nowrap;
+  height: auto;
+  align-items: center;
+  width: 100%;
+  display: flex;
+  min-height: 85vh;
+  min-width: 100vw;
 
+  @media only screen and (max-width: 400px) {
+    min-height: 90vh;
+  }
+`;
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -233,7 +245,13 @@ const ContentWrapper = styled.div`
   overflow: hidden;
 `;
 
-c
+const BgWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  flex-flow: column nowrap;
+  justify-content: center;
+`;
+
 const CounterWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -253,7 +271,18 @@ const WalletRows = styled.div`
   border-top: 1px solid var(--light-grey3);
 `;
 
-c
+const WalletRow = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  padding-bottom: 16px;
+  align-items: center;
+  gap: 32px;
+  align-self: stretch;
+  border-bottom: 1px solid var(--light-grey3);
+  width: 100%;
+  overflow: hidden;
+`;
+
 const WalletRowName = styled.div`
   width: 150px;
   color: var(--night);
@@ -270,10 +299,13 @@ const WalletRowName = styled.div`
 const WalletRowValue = styled.div`
   display: flex;
   width: 100%;
- font-size: 16px;
+  align-items: center;
+  gap: 8px;
+  flex: 1 0 0;
+  align-self: stretch;
+  font-size: 24px;
   font-weight: 700;
-  text-transform: uppercase;
-  
+  line-height: 120%;
 
   @media only screen and (max-width: ${BREAKPOINTS.mobile}) {
     font-size: 20px;
