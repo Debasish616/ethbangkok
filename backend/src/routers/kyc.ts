@@ -270,9 +270,9 @@ const WalletRowName = styled.div`
 const WalletRowValue = styled.div`
   display: flex;
   width: 100%;
-  align-items: center;
-  gap: 8px;
-  flex: 1 0 0;
+ font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
   
 
   @media only screen and (max-width: ${BREAKPOINTS.mobile}) {
