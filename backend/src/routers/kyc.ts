@@ -288,7 +288,8 @@ const StyledCreditImage = styled(CreditImage)`
 const KintoLabel = styled.div`
   color: var(--night);
   font-size: 24px;
- 
+  font-weight: 400;
+  line-height: 120%; /* 28.8px */
   @media only screen and (max-width: ${BREAKPOINTS.mobile}) {
     font-size: 20px;
   }
