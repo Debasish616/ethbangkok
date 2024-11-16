@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+#app {
+    text-align: center;
+}
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+#account-info {
+    margin-top: 20px;
+}
