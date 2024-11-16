@@ -4,7 +4,18 @@ import {
   encodeFunctionData, Address, getContract,
   defineChain, createPublicClient, http
 } from 'viem';
-
+import styled from 'styled-components';
+import AppHeader from 'components/shared/AppHeader';
+import AppFooter from 'components/shared/AppFooter';
+import {
+  BaseScreen, BaseHeader, LearnLink, KintoAddress,
+  GlobalLoader, PrimaryButton
+} from 'components/shared';
+import { BREAKPOINTS } from 'config';
+import { ReactComponent as CreditImage } from './credit.svg';
+import numeral from 'numeral';
+import contractsJSON from '../public/abis/7887.json';
+import './App.css';
 
 interface KYCViewerInfo {
   isIndividual: boolean;
@@ -18,7 +29,7 @@ interface KYCViewerInfo {
 export const counterAbi = [{ "type": "constructor", "inputs": [], "stateMutability": "nonpayable" }, { "type": "function", "name": "count", "inputs": [], "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }], "stateMutability": "view" }, { "type": "function", "name": "increment", "inputs": [], "outputs": [], "stateMutability": "nonpayable" }];
 
 const kinto = defineChain({
-  id: 6728,
+  id: 7887,
   name: 'Kinto',
   network: 'kinto',
   nativeCurrency: {
@@ -26,7 +37,12 @@ const kinto = defineChain({
     name: 'ETH',
     symbol: 'ETH',
   },
- 
+  rpcUrls: {
+    default: {
+      http: ['https://rpc.kinto-rpc.com/'],
+      webSocket: ['wss://rpc.kinto.xyz/ws'],
+    },
+  },
   blockExplorers: {
     default: { name: 'Explorer', url: 'https://kintoscan.io' },
   },
@@ -48,7 +64,19 @@ const KintoConnect = () => {
     }
   }
 
- 
+  async function fetchCounter() {
+    const client = createPublicClient({
+      chain: kinto,
+      transport: http(),
+    });
+    const counter = getContract({
+      address: counterAddress as Address,
+      abi: counterAbi,
+      client: { public: client }
+    });
+    const count = await counter.read.count([]) as BigInt;
+    setCounter(parseInt(count.toString()));
+  }
 
   async function increaseCounter() {
     const data = encodeFunctionData({
@@ -56,7 +84,15 @@ const KintoConnect = () => {
       functionName: 'increment',
       args: []
     });
-    
+    setLoading(true);
+    try {
+      const response = await kintoSDK.sendTransaction([{ to: counterAddress, data, value: BigInt(0) }]);
+      await fetchCounter();
+    } catch (error) {
+      console.error('Failed to login/signup:', error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function fetchKYCViewerInfo() {
@@ -66,7 +102,11 @@ const KintoConnect = () => {
       chain: kinto,
       transport: http(),
     });
-   
+    const kycViewer = getContract({
+      address: contractsJSON.contracts.KYCViewer.address as Address,
+      abi: contractsJSON.contracts.KYCViewer.abi,
+      client: { public: client }
+    });
 
     try {
       const [isIndividual, isCorporate, isKYC, isSanctionsSafe, getCountry, getWalletOwners] = await Promise.all([
@@ -78,19 +118,19 @@ const KintoConnect = () => {
         kycViewer.read.getWalletOwners([accountInfo.walletAddress])
       ]);
 
-    //   setKYCViewerInfo({
-    //     isIndividual,
-    //     isCorporate,
-    //     isKYC,
-    //     isSanctionsSafe,
-    //     getCountry,
-    //     getWalletOwners
-    //   } as KYCViewerInfo);
-    // } catch (error) {
-    //   console.error('Failed to fetch KYC viewer info:', error);
-    // }
+      setKYCViewerInfo({
+        isIndividual,
+        isCorporate,
+        isKYC,
+        isSanctionsSafe,
+        getCountry,
+        getWalletOwners
+      } as KYCViewerInfo);
+    } catch (error) {
+      console.error('Failed to fetch KYC viewer info:', error);
+    }
 
-    // console.log('KYCViewerInfo:', kycViewerInfo);
+    console.log('KYCViewerInfo:', kycViewerInfo);
   }
 
   async function fetchAccountInfo() {
