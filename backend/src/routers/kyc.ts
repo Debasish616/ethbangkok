@@ -18,7 +18,7 @@ interface KYCViewerInfo {
 export const counterAbi = [{ "type": "constructor", "inputs": [], "stateMutability": "nonpayable" }, { "type": "function", "name": "count", "inputs": [], "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }], "stateMutability": "view" }, { "type": "function", "name": "increment", "inputs": [], "outputs": [], "stateMutability": "nonpayable" }];
 
 const kinto = defineChain({
-  id: 7887,
+  id: 6728,
   name: 'Kinto',
   network: 'kinto',
   nativeCurrency: {
@@ -90,7 +90,7 @@ const KintoConnect = () => {
     //   console.error('Failed to fetch KYC viewer info:', error);
     // }
 
-    console.log('KYCViewerInfo:', kycViewerInfo);
+    // console.log('KYCViewerInfo:', kycViewerInfo);
   }
 
   async function fetchAccountInfo() {
