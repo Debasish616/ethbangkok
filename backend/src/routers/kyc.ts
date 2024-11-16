@@ -78,15 +78,17 @@ const KintoConnect = () => {
         kycViewer.read.getWalletOwners([accountInfo.walletAddress])
       ]);
 
-      setKYCViewerInfo({
-        isIndividual,
-        isCorporate,
-        isKYC,
-        isSanctionsSafe,
-        getCountry,
-        getWalletOwners
-      } as KYCViewerInfo);
-    
+    //   setKYCViewerInfo({
+    //     isIndividual,
+    //     isCorporate,
+    //     isKYC,
+    //     isSanctionsSafe,
+    //     getCountry,
+    //     getWalletOwners
+    //   } as KYCViewerInfo);
+    // } catch (error) {
+    //   console.error('Failed to fetch KYC viewer info:', error);
+    // }
 
     console.log('KYCViewerInfo:', kycViewerInfo);
   }
@@ -192,7 +194,19 @@ const KintoConnect = () => {
                       <WalletRowName>Counter</WalletRowName>
                       <WalletRowValue>
                         <ETHValue>{counter}</ETHValue>
-                  
+                      </WalletRowValue>
+                    </WalletRow>
+                  </WalletRows>
+                  <WalletNotice>
+                    <span>Attention!</span> Only send funds to your wallet address in the Kinto Network
+                  </WalletNotice>
+                  {accountInfo && (
+                    <PrimaryButton onClick={increaseCounter}>
+                      Increase Counter
+                    </PrimaryButton>
+                  )}
+                  <LearnLink link={"https://docs.kinto.xyz"} text="Learn more about the Kinto Wallet SDK" />
+                </CounterWrapper>
               </BgWrapper>
             )}
             {!accountInfo && (
